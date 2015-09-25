@@ -1,0 +1,71 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html">
+	<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+	<h:head>
+
+	</h:head>
+
+	<h:body>
+
+
+
+		<pm:page title="Hello World">
+			<h:form id="corpo">
+				<pm:view id="main">
+					<pm:page id="principal">
+
+						<h:form>
+							<p:tabMenu activeIndex="2">
+								<p:menuitem value="Home" icon="ui-icon-home" outcome="index"
+									iconPos="top" />
+								<p:menuitem value="Pedido" icon="ui-icon-gear" outcome="pedido"
+									iconPos="top" />
+								<p:menuitem value="Cliente" icon="ui-icon-search" iconPos="top"
+									outcome="cliente" />
+							</p:tabMenu>
+
+						</h:form>
+						<pm:content>
+
+							<pm:field>
+								<p:outputLabel value="Nome/Razão Social" />
+								<p:inputText value="#{pedidoBean.cliente.nome}" />
+
+							</pm:field>
+
+							<pm:field>
+								<p:outputLabel value="CPF/CNPJ" />
+								<p:inputText value="#{pedidoBean.cliente.cpf_cnpj}" />
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="E-mail" />
+								<p:inputText value="#{pedidoBean.cliente.email}" />
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="Telefone" />
+								<p:inputText value="#{pedidoBean.cliente.telefone}" />
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="Celular" />
+								<p:inputText value="#{pedidoBean.cliente.celular}" />
+							</pm:field>
+
+							<p:commandButton action="#{pedidoBean.salvar()}" value="Salvar"
+								update="" id="salvarCliente" />
+
+
+
+
+
+						</pm:content>
+					</pm:page>
+				</pm:view>
+			</h:form>
+		</pm:page>
+	</h:body>
+</f:view>

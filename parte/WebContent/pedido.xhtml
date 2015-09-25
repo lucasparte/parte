@@ -1,0 +1,164 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html">
+	<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+	<h:head>
+		<script src="js/javaScripts.js" type="text/javascript"></script>
+		<script src="js/funcoesValida.js" type="text/javascript"></script>
+		
+		
+
+	</h:head>
+
+	<h:body>
+
+
+
+		<pm:page title="Hello World">
+			<h:form id="corpo">
+				<pm:view id="main">
+					<pm:page id="principal">
+
+						<h:form>
+							<p:tabMenu activeIndex="1">
+								<p:menuitem value="Home" icon="ui-icon-home" outcome="index"
+									iconPos="top" />
+								<p:menuitem value="Pedido" icon="ui-icon-gear" outcome="pedido"
+									iconPos="top" />
+								<p:menuitem value="Cliente" icon="ui-icon-search" iconPos="top"
+									outcome="cliente" />
+							</p:tabMenu>
+
+						<!--	<p:commandButton id="contractInfo" value="Selecionar Cliente"
+								style="width:100%;" onerror="dlg.show();"
+								onsuccess="dlg.show();">
+							</p:commandButton>
+
+							<p:dialog id="myDialog" header="Lista de Clientes"
+								widgetVar="dlg" appendToBody="true">
+							
+									<p:column headerText="Produto" priority="1">
+										<h:outputText value="#{pedido.produto}" />
+									</p:column>
+
+									<p:column headerText="Quantidade" priority="2">
+										<h:outputText value="#{pedido.qtd}" />
+									</p:column>
+
+									<p:column headerText="Preço" priority="3">
+										<h:outputText value="#{pedido.preco}" />
+									</p:column>
+
+									<p:column headerText="Observação" priority="4">
+										<h:outputText value="#{pedido.observacao}" />
+									</p:column>
+								</p:dataTable>
+							</p:dialog>
+-->
+	
+						</h:form> 
+						<pm:content>
+
+							<pm:field>
+								<p:outputLabel value="Nome/Razão Social" />
+								<p:inputText value="#{pedidoBean.cliente.nome}" 
+								id="nome_razao" disabled="#{!pedidoBean.isDisableItens}" />
+
+							</pm:field>
+
+							<pm:field>
+								<p:outputLabel value="CPF/CNPJ" />
+								<p:inputText value="#{pedidoBean.cliente.cpf_cnpj}"
+								id="cpf_cnpj" disabled="#{!pedidoBean.isDisableItens}" onblur="return mascaraCpfCnpjOn(this)"
+								onkeypress="return mascaraCpfCnpjOn(this)"/>
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="E-mail" />
+								<p:inputText value="#{pedidoBean.cliente.email}" 
+								id="email" disabled="#{!pedidoBean.isDisableItens}" onblur="return fverEmail(this)"/>
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="Telefone" />
+								<p:inputText value="#{pedidoBean.cliente.telefone}"  maxlength="15" 
+								id="telefone" disabled="#{!pedidoBean.isDisableItens}" onkeypress="return mascaraT(this , mtel)"/>
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="Celular" />
+								<p:inputText value="#{pedidoBean.cliente.celular}" maxlength="15" 
+								id="celular" disabled="#{!pedidoBean.isDisableItens}"  onkeypress="return mascaraT(this , mtel)"/>
+							</pm:field>
+
+							<p:commandButton action="#{pedidoBean.salvar()}" value="Salvar"
+								update="produto qtd obs preco qtd produto celular telefone 
+									email cpf_cnpj nome_razao" id="salvarCliente" />
+
+							<pm:field>
+								<p:outputLabel value="Produto" />
+								<p:inputText value="#{pedidoBean.itPedido.produto}"
+									id="produto" disabled="#{pedidoBean.isDisableItens}" />
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="Quantidade" />
+								<p:inputText value="#{pedidoBean.itPedido.qtd}" id="qtd"
+									disabled="#{pedidoBean.isDisableItens}" />
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="Preço" />
+								<p:inputText value="#{pedidoBean.itPedido.preco}"
+									ajax="false" id="preco" disabled="#{pedidoBean.isDisableItens}" onkeypress="moeda(this, 1)"/>
+							</pm:field>
+							<pm:field>
+								<p:outputLabel value="Observação" />
+								<p:inputText value="#{pedidoBean.itPedido.observacao}"
+									id="obs" disabled="#{pedidoBean.isDisableItens}" />
+							</pm:field>
+
+
+
+							<h:commandButton action="#{pedidoBean.insereItemLista()}"
+								id="btnInsereLista" value="Salvar Item"
+								disabled="" update="listaItens " />
+
+
+							<p:growl id="msgs" showDetail="true" />
+
+							<p:dataTable var="pedido" id="listaItens"
+								tableStyleClass="ui-table-columntoggle" disable="false"
+								value="#{pedidoBean.itemPedido}">
+
+								<p:column headerText="Produto" priority="1">
+									<h:outputText value="#{pedido.produto}" />
+								</p:column>
+
+								<p:column headerText="Quantidade" priority="2">
+									<h:outputText value="#{pedido.qtd}" />
+								</p:column>
+
+								<p:column headerText="Preço" priority="3">
+									<h:outputText value="#{pedido.preco}" />
+								</p:column>
+
+								<p:column headerText="Observação" priority="4">
+									<h:outputText value="#{pedido.observacao}" />
+								</p:column>
+							</p:dataTable>
+							
+						
+							
+							<h:commandButton value="Download" action="#{pedidoBean.pdf}" />
+							<h:commandButton value="Enviar Email" action="#{pedidoBean.sendMail}" />
+							<h:commandButton value="pdf" action="#{pedidoBean.teste}" />
+						
+
+
+						</pm:content>
+					</pm:page>
+				</pm:view>
+			</h:form>
+		</pm:page>
+	</h:body>
+</f:view>

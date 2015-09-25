@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+
+</h:head>
+
+<pm:page title="Hello World">
+
+	<pm:view id="main">
+
+		<h:form>
+
+			<p:tabMenu activeIndex="2">
+				<p:menuitem value="Home" icon="ui-icon-home"  outcome="index"
+					iconPos="top" />
+				<p:menuitem value="Pedido"  icon="ui-icon-gear" outcome="pedido"
+					iconPos="top" />
+				<p:menuitem value="Cliente" icon="ui-icon-search" outcome="pesquisaCliente"
+					iconPos="top" />
+			</p:tabMenu>
+
+		</h:form>
+	</pm:view>
+
+</pm:page>
+</html>
