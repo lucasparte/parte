@@ -18,7 +18,7 @@ public class FileDownloadView {
      
     private StreamedContent file;
     
-    
+    private StreamedContent teste;
      
     public FileDownloadView() {        
         InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/images/movel.jpg");
