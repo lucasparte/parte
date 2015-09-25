@@ -17,6 +17,8 @@ import org.primefaces.model.StreamedContent;
 public class FileDownloadView {
      
     private StreamedContent file;
+    
+    
      
     public FileDownloadView() {        
         InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/images/movel.jpg");
